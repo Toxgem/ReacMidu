@@ -1,0 +1,26 @@
+img{
+    border-radius: 50%;
+    box-shadow: 0 0 15px black;
+    width: 120px;
+    margin: 10px;
+}
+img.is-small{
+    width: 50px;
+}
+img.large{
+    width: 200px
+}
+picture{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 140px;
+}
+
+img.disabled{
+    opacity: 0.3;
+}
+div{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 25px;
+}
