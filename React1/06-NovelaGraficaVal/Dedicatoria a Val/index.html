@@ -1,15 +1,96 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dedicatoria a Val</title>
-  </head>
-  <body>
-    <div id="root">
-      
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+
+    <link rel="shortcut icon" type="image/jpg" href="./src/assets/whatsapp.png" />
+    <title>Para Val</title>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="header">
+            <div class="avatar">
+                <img src="./src/assets/MarcoProf.png" alt="">
+            </div>
+            <div class="chat-header-right">
+                <img src="./src/assets/circle-notch-solid.svg" alt="">
+                <img src="./src/assets/chat.svg" alt="">
+                <img src="./src/assets/more.svg" alt="">
+            </div>
+        </div>
+        <div class="sidebar-search">
+            <div class="sidebar-search-container">
+                <img src="./src/assets/search-solid.svg" alt="">
+                <input type="text" placeholder="Search or start new chat">
+            </div>
+        </div>
+        <div class="sidebar-chats">
+            <div class="sidebar-chat">
+                <div class="chat-avatar">
+                    <img src="./src/assets/valProf.jpg" alt="">
+                </div>
+                <div class="chat-info">
+                    <h4>Val 🦇</h4>
+                    <p>...</p>
+                </div>
+                <div class="time">
+                    <p>00:00 pm</p>
+                </div>
+            </div>
+          
+       
+           
+       
+          
+       
+          
+          
+        </div>
     </div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+
+
+    <div class="message-container">
+        <div class="header">
+            <div class="chat-title">
+                <div class="avatar">
+                    <img src="./src/assets/valProf.jpg" alt="">
+                </div>
+                <div class="message-header-content">
+                    <h4>Val 🦇</h4>
+                    <p>online</p>
+                </div>
+            </div>
+            <div class="chat-header-right">
+               <img src="./src/assets/search-solid.svg" alt="">
+                <img src="./src/assets/more.svg" alt="">
+            </div>
+        </div>
+        <div class="message-content">
+           
+            <p class="chat-message chat-sent">Hola Val esto lo escribi para ti <span class='chat-timestamp'></span></p>
+            <p class="chat-message chat-sent">Dale a los 3 puntitos <span class='chat-timestamp'></span></p>
+           
+            <div id="root">
+      
+            </div>
+            <script type="module" src="./src/main.jsx"></script>
+        </div>
+        <div class="message-footer">
+            <img src="./src/assets/smile.svg" alt=" ">
+            <img src="./src/assets/paper-clip.svg" alt="">
+            <input type="text" placeholder="Type a message" disabled>
+            <button id="siguiente" ><img src="./src/assets/message.svg" alt="" srcset=""></button>
+        </div>
+    </div>
+</body>
+
 </html>
