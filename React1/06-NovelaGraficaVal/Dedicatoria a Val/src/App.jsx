@@ -43,7 +43,7 @@ y que te sientes mas comoda recibiendo afecto`,
 `Y si no lo sientes pues lo seguire haciendo, porque siempre me tendras`,
 `Por esto y mucho mas, Te amo.`,
 `Feliz dia de val 600 <br/>
-Eres el amor de mi vida y te dare el amor que siempre mereciste`
+Eres el amor de mi vida y te dare el amor que siempre mereciste`,``
 ]
   const handleClick = () => {
     if (count < mensajesParaVal.length - 1) {
