@@ -42,7 +42,7 @@ y que te sientes mas comoda recibiendo afecto`,
 `Te dedicare atencion todos los dias por el resto de tu vida hasta que te sientas suficiente`,
 `Y si no lo sientes pues lo seguire haciendo, porque siempre me tendras`,
 `Por esto y mucho mas, Te amo.`,
-`Feliz dia de val 600 <br/>
+`Feliz dia de val 600 
 Eres el amor de mi vida y te dare el amor que siempre mereciste`,``
 ]
   const handleClick = () => {
