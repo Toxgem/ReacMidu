@@ -6,8 +6,8 @@ function App() {
       const [messages, setMessages] = useState(['Esto es para ti']);
     
       const [count, setCount] = useState(0);
-      const imagenes = ["./src/assets/valestilo5.jpg", "./src/assets/valestilo4.jpg", "./src/assets/ValEstilo2.jpeg",
-    "./src/assets/ValEstilo1.jpeg", `./src/assets/MarcoProf.png`];
+      const imagenes = ["/src/assets/valestilo5.jpg", "/src/assets/valestilo4.jpg", "/src/assets/ValEstilo2.jpeg",
+    "/src/assets/ValEstilo1.jpeg", `/src/assets/MarcoProf.png`];
 
 
       const mensajesParaVal= ["Probablemente ni tu ni yo esperabamos que esta tradicion durara tanto tiempo",
