@@ -65,9 +65,7 @@ Eres el amor de mi vida y te dare el amor que siempre mereciste`
     });
   }
       
-     /* const existingButton = document.querySelector('#siguiente');
-
-      existingButton.addEventListener('click', handleClick); */
+    
 return(
     <section>
  
