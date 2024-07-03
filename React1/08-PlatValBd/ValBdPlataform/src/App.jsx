@@ -6,42 +6,76 @@ import React, {  useState } from 'react';
 
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
+class Sprite {
+    constructor(position, imageSrc, width, height) {
+        this.position = position;
+        this.image = new Image();
+        this.image.onload = () => {
+            this.loaded = true;
+        };
+        this.image.src = imageSrc;
+        this.width = canvas.width   // Ancho deseado para la imagen
+        this.height = canvas.height; // Alto deseado para la imagen
+        this.loaded = false;  // Bandera para verificar si la imagen está cargada
+    }
 
+    // Método para dibujar el fondo
+    drawBackground() {
+        if (!this.loaded) return; // Esperar a que la imagen esté completamente cargada
+        ctx.drawImage(this.image, this.position.x, this.position.y);
+    }
+}
+
+// Instancia de Sprite para el fondo
+const background = new Sprite({
+    x: 0,
+    y: 0
+}, "./src/assets/background.png");
 // Dibuja el suelo negro
 function drawGround() {
     ctx.fillStyle = "#133"; // Darker color for solid floor
     ctx.fillRect(0, canvas.height - 20, canvas.width, 20); // Altura del suelo: 20 píxeles
 }
 
-// Propiedades del personaje
-let x = 150; // Posición inicial en X
-let y = 150; // Posición inicial en Y
-let velX = 0; // Velocidad en X
-let velY = 0; // Velocidad en Y
-let jumping = false; // Estado de salto
-let jumpForce = -12; // Fuerza de salto
-let speed = 1.5; // Velocidad máxima
-let friction = 0.8; // Fricción
-let gravity = 0.4; // Gravedad
-let keys = {}; // Almacena las teclas presionadas
-let blockRadius = 30; // Radio del bloque
-let blockX = canvas.width / 2; // Posición inicial del bloque
-let blockY = canvas.height / 2 - 50; // Posición vertical del bloque
-let levelUpTextSize = 18; // Tamaño inicial de texto "Level up!"
-let hitCounter = 0; // Contador de veces que se ha golpeado el bloque
 
-// Escucha los eventos de teclado (para mover la pelota)
-window.addEventListener("keydown", (e) => {
-    keys[e.key] = true;
-});
+// Variables para la animación del sprite
+const spriteWidth = 120;
+const spriteHeight = 80;
+let frameX = 0; // Coordenada X del primer frame en la sprite sheet
+let frameY = 0; // Coordenada Y del primer frame en la sprite sheet
+let frameCount = 8; // Número total de frames en la sprite sheet
+let currentFrame = 0; // Frame actual de la animación
+let frameRate = 15; // Velocidad de la animación (frames por segundo)
+let frameIndex = 0; // Índice del frame actual
 
-window.addEventListener("keyup", (e) => {
-    keys[e.key] = false;
-});
+// Función para actualizar la animación del sprite
+function updateSpriteFrame() {
+    frameIndex++;
 
+    if (frameIndex >= frameRate) {
+        frameIndex = 0;
+        currentFrame++;
+
+        if (currentFrame >= frameCount) {
+            currentFrame = 0;
+        }
+
+        // Calcular las coordenadas X e Y del siguiente frame en la sprite sheet
+        frameX = currentFrame * spriteWidth;
+        frameY = 0; // Suponiendo que todos los frames están en la misma fila (Y=0)
+    }
+}
 function update() {
-    if (keys["ArrowLeft"]) velX = -speed;
-    else if (keys["ArrowRight"]) velX = speed;
+    let facingLeft = false; // Inicialmente el sprite mira hacia la derecha
+
+    if (keys["ArrowLeft"]){
+        velX = -speed ;
+        facingLeft = true;
+    }  // Mover hacia la izquierda;
+    else if (keys["ArrowRight"]){
+        velX = speed ;
+        facingLeft = false;
+    } 
     else velX = 0;
 
     if (keys["ArrowUp"] && !jumping) {
@@ -66,12 +100,34 @@ function update() {
         jumping = false;
     }
 
+   
     // Dibuja la pelota
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawGround();
-    ctx.beginPath();
-    ctx.arc(x, y, 25, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    background.drawBackground()
+    updateSpriteFrame();
+    const sprite = new Image();
+    sprite.src = './src/assets/Colour1/NoOutline/120x80_PNGSheets/_Run.png'; // Ruta de tu sprite
+    ctx.save(); // Guardar el estado actual del contexto
+if (facingLeft) {
+    // Si el sprite mira hacia la izquierda, reflejar horizontalmente
+    ctx.scale(-1, 1);
+    ctx.drawImage(
+        sprite, 
+        frameX, frameY, spriteWidth, spriteHeight, // Recortar el frame correcto de la sprite sheet
+        -(x - spriteWidth / 1.7) - spriteWidth, y - spriteHeight / 1.1, spriteWidth, spriteHeight // Dibujar en la posición correcta reflejada
+    );
+} else {
+    // Si el sprite mira hacia la derecha, dibujar normalmente
+    ctx.drawImage(
+        sprite, 
+        frameX, frameY, spriteWidth, spriteHeight, // Recortar el frame correcto de la sprite sheet
+        x - spriteWidth / 1.7, y - spriteHeight / 1.1, spriteWidth, spriteHeight // Dibujar en la posición correcta en el canvas
+    );
+}
+ctx.restore();
+
+    drawGround()
+   
 
     // Dibuja el bloque
     ctx.fillStyle = "black";
@@ -127,6 +183,35 @@ function update() {
     // Solicita el siguiente fotograma
     requestAnimationFrame(update);
 }
+
+
+// Propiedades del personaje
+let x = 150; // Posición inicial en X
+let y = 150; // Posición inicial en Y
+let velX = 0; // Velocidad en X
+let velY = 0; // Velocidad en Y
+let jumping = false; // Estado de salto
+let jumpForce = -12; // Fuerza de salto
+let speed = 2.5; // Velocidad máxima
+let friction = 0.8; // Fricción
+let gravity = 0.4; // Gravedad
+let keys = {}; // Almacena las teclas presionadas
+let blockRadius = 30; // Radio del bloque
+let blockX = canvas.width / 2; // Posición inicial del bloque
+let blockY = canvas.height / 2 - 50; // Posición vertical del bloque
+let levelUpTextSize = 18; // Tamaño inicial de texto "Level up!"
+let hitCounter = 0; // Contador de veces que se ha golpeado el bloque
+
+// Escucha los eventos de teclado (para mover la pelota)
+window.addEventListener("keydown", (e) => {
+    keys[e.key] = true;
+});
+
+window.addEventListener("keyup", (e) => {
+    keys[e.key] = false;
+});
+
+
 
 // Inicia la animación
 update();
