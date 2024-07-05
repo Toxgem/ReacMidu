@@ -6,31 +6,9 @@ import React, {  useState } from 'react';
 
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
-class Sprite {
-    constructor(position, imageSrc, width, height) {
-        this.position = position;
-        this.image = new Image();
-        this.image.onload = () => {
-            this.loaded = true;
-        };
-        this.image.src = imageSrc;
-        this.width = canvas.width   // Ancho deseado para la imagen
-        this.height = canvas.height; // Alto deseado para la imagen
-        this.loaded = false;  // Bandera para verificar si la imagen está cargada
-    }
 
     // Método para dibujar el fondo
-    drawBackground() {
-        if (!this.loaded) return; // Esperar a que la imagen esté completamente cargada
-        ctx.drawImage(this.image, this.position.x, this.position.y);
-    }
-}
 
-// Instancia de Sprite para el fondo
-const background = new Sprite({
-    x: 0,
-    y: 0
-}, "./src/assets/background.png");
 // Dibuja el suelo negro
 function drawGround() {
     ctx.fillStyle = "#133"; // Darker color for solid floor
@@ -100,26 +78,41 @@ function update() {
         jumping = false;
     }
 
-   
+ 
     // Dibuja la pelota
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    background.drawBackground()
+
     updateSpriteFrame();
     const sprite = new Image();
+    const sprite2= new Image()
     sprite.src = './src/assets/Colour1/NoOutline/120x80_PNGSheets/_Run.png'; // Ruta de tu sprite
+    sprite2.src= "./src/assets/Colour1/NoOutline/120x80_PNGSheets/_Idle.png"
     ctx.save(); // Guardar el estado actual del contexto
-if (facingLeft) {
+
+ if (facingLeft && keys["ArrowLeft"]) {
     // Si el sprite mira hacia la izquierda, reflejar horizontalmente
+    
     ctx.scale(-1, 1);
     ctx.drawImage(
         sprite, 
         frameX, frameY, spriteWidth, spriteHeight, // Recortar el frame correcto de la sprite sheet
         -(x - spriteWidth / 1.7) - spriteWidth, y - spriteHeight / 1.1, spriteWidth, spriteHeight // Dibujar en la posición correcta reflejada
     );
-} else {
-    // Si el sprite mira hacia la derecha, dibujar normalmente
+
+
+}else if(!facingLeft && keys["ArrowRight"]) {
     ctx.drawImage(
         sprite, 
+        frameX, frameY, spriteWidth, spriteHeight, // Recortar el frame correcto de la sprite sheet
+        x - spriteWidth / 1.7, y - spriteHeight / 1.1, spriteWidth, spriteHeight // Dibujar en la posición correcta en el canvas
+    );
+}
+
+else {
+    
+    // Si el sprite mira hacia la derecha, dibujar normalmente
+    ctx.drawImage(
+        sprite2, 
         frameX, frameY, spriteWidth, spriteHeight, // Recortar el frame correcto de la sprite sheet
         x - spriteWidth / 1.7, y - spriteHeight / 1.1, spriteWidth, spriteHeight // Dibujar en la posición correcta en el canvas
     );
