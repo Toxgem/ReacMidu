@@ -85,10 +85,13 @@ function update() {
     updateSpriteFrame();
     const sprite = new Image();
     const sprite2= new Image()
+    const backgroundSprite=new Image()
     sprite.src = './Colour1/NoOutline/120x80_PNGSheets/_Run.png'; // Ruta de tu sprite
     sprite2.src= "./Colour1/NoOutline/120x80_PNGSheets/_Idle.png"
+    backgroundSprite.src="/background.png"
     ctx.save(); // Guardar el estado actual del contexto
 
+    ctx.drawImage(backgroundSprite, 0, 0, canvas.width, canvas.height)
  if (facingLeft && keys["ArrowLeft"]) {
     // Si el sprite mira hacia la izquierda, reflejar horizontalmente
     
@@ -153,7 +156,9 @@ ctx.restore();
             blockRadius += 1;
             levelUpTextSize += 0.2; // Make the text grow slightly with the circle
         }
+        if (hitCounter<=26){
 
+        }
         // Explotar si se ha golpeado el bloque 27 veces
         if (hitCounter === 27) {
             // Clear the canvas and display the "Happy Birthday!" message
@@ -162,7 +167,7 @@ ctx.restore();
             ctx.fillStyle = "white";
             ctx.font = "30px Arial";
             ctx.textAlign = "center";
-            ctx.fillText("Happy Birthday!", canvas.width / 2, canvas.height / 2);
+            ctx.fillText("Feliz cumpleaños Val! \n Te amo", canvas.width / 2, canvas.height / 2);
             // Draw restart button
             ctx.fillStyle = "gray";
             ctx.fillRect(canvas.width / 2 - 50, canvas.height / 2 + 30, 100, 40);
@@ -191,7 +196,7 @@ let gravity = 0.4; // Gravedad
 let keys = {}; // Almacena las teclas presionadas
 let blockRadius = 30; // Radio del bloque
 let blockX = canvas.width / 2; // Posición inicial del bloque
-let blockY = canvas.height / 2 - 50; // Posición vertical del bloque
+let blockY = canvas.height / 1.8 - 40; // Posición vertical del bloque
 let levelUpTextSize = 18; // Tamaño inicial de texto "Level up!"
 let hitCounter = 0; // Contador de veces que se ha golpeado el bloque
 
@@ -212,15 +217,12 @@ update();
 // Agrega un evento de clic para el botón de reinicio
 canvas.addEventListener("click", function(event) {
     // Verificar si se hizo clic en el botón de reinicio
-    if (
-        event.clientX >= canvas.width / 2 - 50 &&
-        event.clientX <= canvas.width / 2 + 50 &&
-        event.clientY >= canvas.height / 2 + 30 &&
-        event.clientY <= canvas.height / 2 + 70
-    ) {
-        // Reiniciar juego
+    if(hitCounter===27){
         resetGame();
+    
     }
+        // Reiniciar juego
+        
 });
 
 // Función para reiniciar el juego
@@ -241,8 +243,8 @@ function resetGame() {
 
 function App() {
   return (
-    <canvas id="myCanvas" width="1200" height="300"></canvas>
-
+    <canvas id="myCanvas" ></canvas>
+    
   );
 }
 
