@@ -85,8 +85,8 @@ function update() {
     updateSpriteFrame();
     const sprite = new Image();
     const sprite2= new Image()
-    sprite.src = './src/assets/Colour1/NoOutline/120x80_PNGSheets/_Run.png'; // Ruta de tu sprite
-    sprite2.src= "./src/assets/Colour1/NoOutline/120x80_PNGSheets/_Idle.png"
+    sprite.src = './public/Colour1/NoOutline/120x80_PNGSheets/_Run.png'; // Ruta de tu sprite
+    sprite2.src= "./public/Colour1/NoOutline/120x80_PNGSheets/_Idle.png"
     ctx.save(); // Guardar el estado actual del contexto
 
  if (facingLeft && keys["ArrowLeft"]) {
