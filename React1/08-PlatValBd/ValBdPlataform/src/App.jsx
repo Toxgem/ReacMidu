@@ -3,10 +3,39 @@ import './App.css'
 import React, {  useState } from 'react';
 
 
-
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
+const mensajes= [
+    "",
+    "Para ti Que has sido maravillosa estos 27 años",
+    "Para que sonrias un momento mas",
+    "Recuerdes que siempre hay tiempo para mas",
+    "Que todas las noches son especiales contigo",
+    "Son 827 noches",
+    "827 dias",
+    "Mas de 5 años de conocerte",
+    "Has crecido tanto que no reconocerias tu viejo yo",
+    "Has avanzado todos estos dias",
+    "Hemos aceptado los errores y aprendido de ello",
+    "Hemos llorado por dolor",
+    "Te he sentido feliz y triste",
+    "Has caido, pero lo mas importante te volviste a levantar",
+    "Hoy espero que cada recuerdo que cree para ti sea algo que te haga sonreir",
+    "Guardare cada sonrisa, para que en los dias malos no estes sola",
+    "Para que siempre te puedas amar",
+    "Para que siempre veas con mis ojos lo maravillosa que puedes ser",
+    "No puedo curarte a veces tampoco puedo parar los malos dias",
+    "Pero me sentare contigo en esos dias",
+    "Hasta que puedas hablar",
+    "Hasta que te des cuenta que ha pasado una vida",
+    "Y que todo el dolor es una memoria pasada",
+    "Y que son mas las sonrisas que las lagrimas derramadas",
+    "Espero que todos esos dias sonrias",
+    "Recordando que siempre puedes sujetar mi mano",
+    "Recordando que siempre has merecido quererte y que te quieran"
+]
 
+let mensajeIndex = 0;
     // Método para dibujar el fondo
 
 // Dibuja el suelo negro
@@ -15,7 +44,12 @@ function drawGround() {
     ctx.fillRect(0, canvas.height - 20, canvas.width, 20); // Altura del suelo: 20 píxeles
 }
 
-
+function drawMessage() {
+    ctx.fillStyle = "white";
+    ctx.font = "20px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText(mensajes[mensajeIndex], canvas.width / 2, 50);
+}
 // Variables para la animación del sprite
 const spriteWidth = 120;
 const spriteHeight = 80;
@@ -150,7 +184,7 @@ ctx.restore();
     if (distance < 25 + blockRadius) {
         velY = -jumpForce;
         hitCounter++;
-
+        mensajeIndex = hitCounter;
         // Hacer crecer el círculo un poco
         if (blockRadius < 40) {
             blockRadius += 1;
@@ -177,7 +211,9 @@ ctx.restore();
             return;
         }
     }
+    drawMessage();
 
+    
     // Solicita el siguiente fotograma
     requestAnimationFrame(update);
 }
@@ -236,6 +272,7 @@ function resetGame() {
     blockRadius = 30;
     levelUpTextSize = 18;
     update();
+    mensajeIndex = 0;
 }
 
 
